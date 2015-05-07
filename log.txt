@@ -1,0 +1,11 @@
+Start:	Mon May 04 12:30:00 2015 -0700
+End:	Mon May 04 14:00:00 2015 -0700
+Task:	Watched week 6 lecture videos on MySQL.
+
+Start:	Mon May 04 19:00:00 2015 -0700
+End:	Mon May 04 22:30:00 2015 -0700
+Task:	Create cs290-assignment4-part2 git repository and ONID database server. Referenced Week 6 lecture “http://us2.php.net/manual/en/mysqli.quickstart.prepared-statements.php”/“MySQL Database Demo” for php code. Created HTML table and mysql database connection.
+
+Start:	Wed May 06 16:00:00 2015 -0700
+End:	Wed May 06 19:40:00 2015 -0700
+Task:	Completed implementation for entering values to onid database. Running into problems swapping checked-in/checked-out values and delete functionality.
