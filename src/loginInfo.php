@@ -1,5 +1,0 @@
-<?php
-
-    $myPassword = "xUIORPKeGnWLLQsI";
-    
-?>
