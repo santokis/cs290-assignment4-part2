@@ -5,13 +5,16 @@
     include 'loginInfo.php';
     
     $mysqli = new mysqli("oniddb.cws.oregonstate.edu", "santokis-db", $myPassword, "santokis-db");
-    $query = "SELECT id, name, category, length, rented FROM inventory";
     
     if($mysqli->connect_errno){
         echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
     }
     
-    if($result = $mysqli->query($query)){
+    //Delete videos
+    
+    $query = "SELECT id, name, category, length, rented FROM inventory";
+    
+    if($queryResult = $mysqli->query($query)){
         echo "<table border = 3>";
         echo "<tr>";
         echo "<th>Name</th>";
@@ -20,30 +23,61 @@
         echo "<th>Status</th>";
         echo "</tr>";
         
-        /* fetch associative array */
-        while($row = $result->fetch_assoc()){
-            if($row["rented"] == 0){
-                $status = "checked out";
-            }
-            else if($row["rented"] == 1){
-                $status = "available";
-            }
-            
+        // fetch associative array
+        while($queryRow = $queryResult->fetch_assoc()){
             echo "<tr>";
-            echo "<td>" . $row["name"] . "</td>";
-            echo "<td>" . $row["category"] . "</td>";
-            echo "<td>" . $row["length"] . "</td>";
-            echo "<td>" . $status . "</td>";
-            echo "</tr>";
-            echo "</form>";
+            echo "<td>" . $queryRow["name"] . "</td>";
+            echo "<td>" . $queryRow["category"] . "</td>";
+            echo "<td>" . $queryRow["length"] . "</td>";
+            if($queryRow["rented"] == 0){
+                $status = "available";
+                echo "<td>" . $status . "</td>";
+                echo "<form action = 'rentVideo.php' method = 'POST'>";
+                echo "<input type = 'hidden' name = 'inID' value = '".$queryRow['id']."'/>";
+                echo "<td><input type = 'submit' name = 'in' value = 'check-in/check-out'/></td></form>";
+            }
+            if($queryRow["rented"] == 1){
+                $status = "checked out";
+                echo "<td>" . $status . "</td>";
+                echo "<form action = 'rentVideo.php' method = 'POST'>";
+                echo "<input type = 'hidden' name = 'outID' value = '".$queryRow['id']."'/>";
+                echo "<td><input type = 'submit' name = 'out' value = 'check-in/check-out'/></td></form>";
+            }
+            echo "<form action = 'deleteVideo.php' method = 'POST'>";
+            echo "<input type = 'hidden' name = 'rowID' value = '".$queryRow['id']."'/>";
+            echo "<td><input type = 'submit' name = 'deleteVideo' value = 'Delete'/></td></tr></form>";
+            
         }
         
         echo "</table>";
     
     }
     
-    /* close connection */
-    //$mysqli->close();
+    echo "<form action = 'deleteVideo.php' method = 'POST'>";
+    echo "<button type = 'submit' name = 'deleteAllVideos' value = " . $queryRow["id"] . ">Delete All Videos</button>";
+    echo "</form>";
+    
+    //Filter categories
+
+    $filter = "SELECT DISTINCT category FROM inventory";
+    $filterResult = mysqli_query($mysqli, $filter);
+    
+    if($filterResult->num_rows > 0){
+        echo "<form action = 'filterVideo.php' method = 'POST'>";
+        echo "<select name = 'filterVideo'>";
+        while($filterRow = $filterResult->fetch_assoc()){
+            foreach($filterResult as $filterRow){
+                //Filter must not be NULL
+                if(strlen($filterRow['category']) > 0){
+                    echo "<option>" . $filterRow['category'] . "</option>";
+                }
+            }
+            echo "<option>All Movies</option>";
+            echo "</select>";
+            echo "<input type = 'submit' value = 'Filter'/>";
+            echo "</form>";
+        }
+    }
     
 ?>
 
@@ -58,6 +92,7 @@
     Name: <input type = "text" name = "name">
     Category: <input type = "text" name = "category">
     Length: <input type = "text" name = "length">
-    <input type = "submit" value = "ADD VIDEO">
+    <input type = "submit" value = "Add Video">
+    </form>
 </body>
 </html>

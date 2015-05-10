@@ -4,8 +4,20 @@ Task:	Watched week 6 lecture videos on MySQL.
 
 Start:	Mon May 04 19:00:00 2015 -0700
 End:	Mon May 04 22:30:00 2015 -0700
-Task:	Create cs290-assignment4-part2 git repository and ONID database server. Referenced Week 6 lecture “http://us2.php.net/manual/en/mysqli.quickstart.prepared-statements.php”/“MySQL Database Demo” for php code. Created HTML table and mysql database connection.
+Task:	Create cs290-assignment4-part2 git repository and ONID database server. Referenced Week 6 lecture “http://us2.php.net/manual/en/mysqli.quickstart.prepared-statements.php” for php code. Created HTML table and mysql database connection.
 
 Start:	Wed May 06 16:00:00 2015 -0700
 End:	Wed May 06 19:40:00 2015 -0700
 Task:	Completed implementation for entering values to onid database. Running into problems swapping checked-in/checked-out values and delete functionality.
+
+Start:	Thu May 07 18:00:00 2015 -0700
+End:	Thu May 07 20:07:00 2015 -0700
+Task:	Completed functionality for deleting individual rows and clearing library. Plan to work on requirement for filtering & check-in/check-out toggle next session.
+
+Start:	Sat May 09 14:00:00 2015 -0700
+End:	Sat May 09 19:00:00 2015 -0700
+Task:	Worked through numerous problems with implementation of filtering functionality. 
+
+Start:	Sun May 10 10:30:00 2015 -0700
+End:	Sun May 10 14:50:00 2015 -0700
+Task:	Completed check-in/check-out based on delete functionality. Ran through all tests and meets all requirements.
